@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ILoveZappos</string>
+    <string name="action_settings">Settings</string>
+
+        <!-- Miscellaneous -->
+    <string name="text_rating_not_found">No Ratings Found</string>
+    <string name="content">content</string>
+    <string name="addToCart">ADD TO CART</string>
+    <string name="sale"> Sale  :</string>
+    <string name="search_hint">Search in Zappos</string>
+    <string name="price">Price :</string>
+    <string name="sku">SKU</string>
+</resources>

@@ -1,0 +1,35 @@
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16sp</dimen>
+
+    <!-- Activity -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Searchbox -->
+    <dimen name="searchbox_width">350dp</dimen>
+    <dimen name="searchbutton_width">250dp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_margin">16dp</dimen>
+    <dimen name="toolbar_height">48dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+
+    <!-- Fab -->
+    <dimen name="fab_marginRight">16dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+
+    <!-- Text Size -->
+    <dimen name="text_size_product">20dp</dimen>
+    <dimen name="text_size_normal">15dp</dimen>
+    <dimen name="text_size_percent">16sp</dimen>
+
+    <!-- Miscellaneous -->
+    <dimen name="backdrop_height">100dp</dimen>
+    <dimen name="content_margin">20dp</dimen>
+    <dimen name="image_margin">4dp</dimen>
+
+
+
+</resources>
