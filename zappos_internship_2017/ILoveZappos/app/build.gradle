@@ -13,8 +13,17 @@ android {
     }
     buildTypes {
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def file = output.outputFile
+                def filename = file.name.replace("app", "ILoveZappos")
+                output.outputFile = new File(file.parent, filename)
+
+            }
         }
     }
     dataBinding {
