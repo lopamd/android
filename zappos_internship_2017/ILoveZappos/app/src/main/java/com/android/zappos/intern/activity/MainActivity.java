@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
                 searchItem(query);
                 return true;
             }
+
         });
     }
 
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.title_bar);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setLogo(R.drawable.zappos_logo);
         actionBar.setDisplayUseLogoEnabled(true);

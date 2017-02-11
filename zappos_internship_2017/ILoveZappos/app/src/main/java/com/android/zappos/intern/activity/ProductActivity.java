@@ -117,8 +117,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.title_bar);
         actionBar.setDisplayShowHomeEnabled(true);
+
         actionBar.setLogo(R.drawable.zappos_logo);
         actionBar.setDisplayUseLogoEnabled(true);
 

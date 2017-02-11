@@ -8,9 +8,7 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:clickable="true"
         android:src="@drawable/ic_shopping_cart_2" />
 
     <!-- Badge Count -->
