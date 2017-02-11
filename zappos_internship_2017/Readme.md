@@ -18,8 +18,11 @@ The UI is developed using Android material design guidelines.
 Picasso library is used for rendering the thumbnail images in product activity.
 
 Here are the library versions used.
+
 1. Retrofit: 2.0.2
+
 2. Gson: 2.6.2
+
 3. Picasso: 2.3.3
 
 
