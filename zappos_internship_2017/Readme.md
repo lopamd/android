@@ -17,7 +17,7 @@ library is used to parse the response and generate product model.
 The UI is developed using Android material design guidelines. 
 Picasso library is used for rendering the thumbnail images in product activity.
 
-Here are the library versions used.
+Here are the versions of external libraries used.
 
 1. Retrofit: 2.0.2
 
@@ -26,6 +26,6 @@ Here are the library versions used.
 3. Picasso: 2.3.3
 
 
-Thanks Zappos for giving the opprtunity to demonstrate my Android development skilss.
+Thanks Zappos for giving the opportunity to demonstrate my Android development skills.
 
   

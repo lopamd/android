@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupActionBar();
-        SearchView searchView = (SearchView) findViewById(R.id.search);
+        searchView = (SearchView) findViewById(R.id.search);
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
@@ -46,7 +46,14 @@ public class MainActivity extends AppCompatActivity{
 
         });
     }
-
+    @Override
+    public void onResume(){
+        Log.v(TAG, "Inside onResume");
+        if(searchView != null) {
+            searchView.setQuery("", false);
+        }
+        super.onResume();
+    }
     public void searchItem(String searchQuery) {
         Intent intent = new Intent(MainActivity.this, ProductActivity.class);
         intent.setAction(Intent.ACTION_SEARCH);

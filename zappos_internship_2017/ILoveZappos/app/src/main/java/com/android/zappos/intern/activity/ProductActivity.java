@@ -141,9 +141,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             public void onResponse(Call<ProductDetails> call, Response<ProductDetails> response) {
                 int statusCode = response.code();
                 List<Product> products = response.body().getResults();
-                binding.setProduct(products.get(0));
+                if(products != null) {
 
-                Log.d(TAG, "Number of Products received: " + products.size());
+                    binding.setProduct(products.get(0));
+                    Log.d(TAG, "Number of Products received: " + products.size());
+                }
             }
 
             public void onFailure(Call<ProductDetails> call, Throwable t) {
