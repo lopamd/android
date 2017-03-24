@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/enterProd_hint"
+            android:id="@+id/textView1"
+            android:textColor="#105614"
+            android:gravity="center_horizontal" />
+
+
+        <EditText
+            android:id="@+id/fieldNum"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF69B4"
+            android:inputType="number|none">
+        </EditText>
+
+        <Button
+            android:id="@+id/btn_select"
+            android:layout_marginTop="10dp"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Create"
+            android:background="@drawable/buttonshape"/>
+
+        <LinearLayout
+            android:id="@+id/linerlayout2"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/Rlayout3"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linerlayout2">
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:text="@string/submit"
+                android:visibility="gone"
+                android:background="@drawable/buttonshape"/>
+
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:text="@string/update"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:background="@drawable/buttonshape"/>
+
+        </RelativeLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/activity_product_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plist_title"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            style="@style/Hyperlink"/>
+        </LinearLayout>
+        <ListView android:id="@+id/list_data"
+            android:layout_below="@+id/activity_product_list"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</ScrollView>
+
+</LinearLayout>

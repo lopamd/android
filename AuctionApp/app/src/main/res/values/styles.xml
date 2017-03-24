@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorCustom</item>
+        <item name="colorPrimaryDark">@color/colorCustomDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="Hyperlink">
+        <item name="android:textColor">#3498db</item>
+        <item name="android:background">@drawable/underline</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="AppTheme">
+        <item name="colorControlNormal">@color/background_odd</item>
+        <item name="colorAccent">@color/background_odd</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+
+</resources>

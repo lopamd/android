@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="heading" type="com.lopa.auctionapp.model.Product"/>
+    </data>
+
+    <!-- Other components -->
+
+    <TextView android:gravity="left"
+        android:id="@+id/productID"
+        android:layout_height="62dp"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:text="product1"/>
+        <!--android:text="@{heading.productName}"/>-->
+
+    <Button
+        android:id="@+id/update_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:text="Update" />
+
+
+</layout>

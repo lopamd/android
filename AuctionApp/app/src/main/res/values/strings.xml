@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">AuctionApp</string>
+    <string name="utype_seller">Seller</string>
+    <string name="utype_buyer">Buyer</string>
+    <string name="utype_both">Both</string>
+    <string name="plist_title">Products available to buy</string>
+    <string name="submit">submit</string>
+    <string name="update">update</string>
+    <string name="reg_hint">After clicking the Register Button. You will be redirected to Login Screen</string>
+    <string name="email_hint">Enter User Email</string>
+    <string name="pass_hint">Enter User Password</string>
+    <string name="name_hint">Enter Full Name</string>
+    <string name="c_account">Create Account</string>
+    <string name="e_hint">Enter Your Email</string>
+    <string name="pass2_hint">Enter Your Password</string>
+    <string name="mobile_hint">Enter Your Mobile</string>
+    <string name="register">Register</string>
+    <string name="enterProd_hint">Enter the number of post,you would like to sell</string>
+    <string name="signUp">Are you new? Sign Up now</string>
+    <string name="signIn">SIGN IN</string>
+    <string name="your_acc">YOUR ACCOUNT</string>
+    <string name="login">LOGIN</string>
+    <string name="logout">Logout</string>
+</resources>
