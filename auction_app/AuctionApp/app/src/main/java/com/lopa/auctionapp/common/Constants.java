@@ -24,5 +24,12 @@ public class Constants {
     public static String LOGIN_INVALID_MSG = "Invalid Username or Password.";
     public static String ENTER_PRODUCT_HINT = " Enter your product name ";
     public static String FIELD_BLANK_MSG = "Field can not be blank";
+    public static String REG_FIELD_BLANK ="Information field should not be blank.";
+    public static String REG_RADIO_BLANK = "Check the radio Button for Seller/Buyer/Both.";
+    public static String REG_REGISTERED_EMAIL_MSG = "Email ID already registered.";
+    public static String REG_SUCCESS_MSG = "Your Account is Successfully Created.";
+    public static String REG_INVALID_MOBILE = "Not a valid mobile number";
+    public static String REG_INVALID_EMAIL = "Not a valid email";
+    public static String REG_ERROR_DB = "User registration failed. Try again";
 
 }

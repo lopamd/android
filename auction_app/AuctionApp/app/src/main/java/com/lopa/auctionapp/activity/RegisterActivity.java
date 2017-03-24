@@ -6,10 +6,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.lopa.auctionapp.SQLiteDB.SQLiteDBHelper;
@@ -26,6 +28,11 @@ public class RegisterActivity extends AppCompatActivity {
     EditText _txtpass;
     EditText _txtmobile;
     Button _btnreg;
+    RadioGroup radioGroup;
+    //RadioButton radio_seller,radio_buyer,radio_both;
+
+    final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
 
 
     @Override
@@ -33,19 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_layout);
 
-//        Bundle extras = getIntent().getExtras();
-//        if(extras == null) {
-//            Log.e(TAG, "No user type intent. Cannot create user");
-//            return;
-//        }
-//
-//        userType = extras.getInt(Constants.UTYPE);
-
         _txtfullname = (EditText) findViewById(R.id.txtname_reg);
         _txtemail = (EditText) findViewById(R.id.txtemail_reg);
         _txtpass = (EditText) findViewById(R.id.txtpass_reg);
         _txtmobile = (EditText) findViewById(R.id.txtmobile_reg);
-        Button _btnreg = (Button) findViewById(R.id.btn_reg);
+        _btnreg = (Button) findViewById(R.id.btn_reg);
+        radioGroup = (RadioGroup) findViewById(R.id.radio1);
+
 
         sqLiteDBHelper = new SQLiteDBHelper(this);
 
@@ -65,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                 //Alert dialog after clicking the Register Account
                 if(fullname.equals("") || email.equals("") || pass.equals("") || mobile.equals("")){
                     builder.setTitle("Information");
-                    builder.setMessage("Information field should not be blank.");
+                    builder.setMessage(Constants.REG_FIELD_BLANK);
                     builder.setPositiveButton("Okey", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -74,33 +75,56 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    boolean found = sqLiteDBHelper.searchUser(email,userType);
-                    if(found) {
+                    boolean email_val = isValidEmail(email);
+                    boolean mobile_val = Patterns.PHONE.matcher(mobile).matches();
+
+                    if(!email_val) {
+                        _txtemail.setError(Constants.REG_INVALID_EMAIL);
+                        _txtemail.requestFocus();
+                    }
+                    else if (!mobile_val){
+                        _txtmobile.setError(Constants.REG_INVALID_MOBILE);
+                        _txtmobile.requestFocus();
+                    }
+                    else if (radioGroup.getCheckedRadioButtonId() == -1){
                         builder.setTitle("Information");
-                        builder.setMessage("Email ID already registered.");
+                        builder.setMessage(Constants.REG_RADIO_BLANK);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
-                                finish();
                             }
                         });
-                    } else if (sqLiteDBHelper.addUser(new User(fullname, email, pass, mobile, userType)) != Constants.DB_INSERT_ERROR){
+                    }
+                    else{
+                        boolean found = sqLiteDBHelper.searchUser(email, userType);
+                        if (found) {
+                            builder.setTitle("Information");
+                            builder.setMessage(Constants.REG_REGISTERED_EMAIL_MSG);
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    finish();
+                                }
+                            });
+                        } else if (sqLiteDBHelper.addUser(new User(fullname, email, pass, mobile, userType)) != Constants.DB_INSERT_ERROR) {
 
-                        builder.setTitle("Information");
-                        builder.setMessage("Your Account is Successfully Created.");
-                        builder.setPositiveButton("Okey", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            builder.setTitle("Information");
+                            builder.setMessage(Constants.REG_SUCCESS_MSG);
+                            builder.setPositiveButton("Okey", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                                //Finishing the dialog and removing Activity from stack.
-                                dialogInterface.dismiss();
-                                finish();
-                            }
-                        });
-                    } else {
-                        Log.e(TAG, "Inserting into DB failed.");
-                        Toast.makeText(getApplicationContext(), "User registration failed. Try again", Toast.LENGTH_SHORT).show();
+                                    //Finishing the dialog and removing Activity from stack.
+                                    dialogInterface.dismiss();
+                                    finish();
+                                }
+                            });
+                        } else {
+                            Log.e(TAG, "Inserting into DB failed.");
+                            Toast.makeText(getApplicationContext(), Constants.REG_ERROR_DB, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -130,5 +154,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
         Log.i(TAG,"Radio button checked "+userType);
+    }
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
     }
 }
