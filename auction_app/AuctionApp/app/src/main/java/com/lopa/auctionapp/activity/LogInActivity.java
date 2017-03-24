@@ -22,6 +22,7 @@ public class LogInActivity extends AppCompatActivity {
     SQLiteDBHelper sqLiteDBHelper;
     SQLiteDatabase db;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +97,8 @@ public class LogInActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
+                _txtemail.setText("");
+                _txtpass.setText("");
 
             }});
 
@@ -106,6 +109,7 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 }
