@@ -64,10 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 //Alert dialog after clicking the Register Account
-                if(fullname.equals("") || email.equals("") || pass.equals("") || mobile.equals("")){
-                    builder.setTitle("Information");
+                if (fullname.equals("") || email.equals("") || pass.equals("") || mobile.equals("")) {
+                    builder.setTitle(Constants.POPUP_INFO);
                     builder.setMessage(Constants.REG_FIELD_BLANK);
-                    builder.setPositiveButton("Okey", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(Constants.POPUP_OK, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //Finishing the dialog.
@@ -78,62 +78,85 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean email_val = isValidEmail(email);
                     boolean mobile_val = Patterns.PHONE.matcher(mobile).matches();
 
-                    if(!email_val) {
+                    if (!email_val) {
                         _txtemail.setError(Constants.REG_INVALID_EMAIL);
                         _txtemail.requestFocus();
-                    }
-                    else if (!mobile_val){
+                    } else if (!mobile_val) {
                         _txtmobile.setError(Constants.REG_INVALID_MOBILE);
                         _txtmobile.requestFocus();
-                    }
-                    else if (radioGroup.getCheckedRadioButtonId() == -1){
-                        builder.setTitle("Information");
+                    } else if (radioGroup.getCheckedRadioButtonId() == -1) {
+                        builder.setTitle(Constants.POPUP_INFO);
                         builder.setMessage(Constants.REG_RADIO_BLANK);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(Constants.POPUP_OK, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
                             }
                         });
-                    }
-                    else{
+                    } else {
                         boolean found = sqLiteDBHelper.searchUser(email, userType);
+                        int user_forUpdate = 0;
+                        if (!found){
+                            user_forUpdate = sqLiteDBHelper.getUserType(email);
+                        }
+                        //if (found == userType || found == Constants.UTYPE_BOTH) {
                         if (found) {
-                            builder.setTitle("Information");
+                            builder.setTitle(Constants.POPUP_INFO);
                             builder.setMessage(Constants.REG_REGISTERED_EMAIL_MSG);
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            builder.setPositiveButton(Constants.POPUP_OK, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                    finish();
-                                }
-                            });
-                        } else if (sqLiteDBHelper.addUser(new User(fullname, email, pass, mobile, userType)) != Constants.DB_INSERT_ERROR) {
-
-                            builder.setTitle("Information");
-                            builder.setMessage(Constants.REG_SUCCESS_MSG);
-                            builder.setPositiveButton("Okey", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    //Finishing the dialog and removing Activity from stack.
                                     dialogInterface.dismiss();
                                     finish();
                                 }
                             });
                         } else {
-                            Log.e(TAG, "Inserting into DB failed.");
-                            Toast.makeText(getApplicationContext(), Constants.REG_ERROR_DB, Toast.LENGTH_SHORT).show();
+                            long result = Constants.DEFAULT_ERROR;
+                            Log.i(TAG,"found : "+ found);
+                            Log.i(TAG,"user_forUpdate : " + user_forUpdate);
+
+                            if ((user_forUpdate == Constants.UTYPE_SELLER && userType == Constants.UTYPE_BUYER) ||
+                                    user_forUpdate == Constants.UTYPE_BUYER && userType == Constants.UTYPE_SELLER) {
+                                //Update user with the new user type
+                                Log.i(TAG,"Inside Update in register 1:" + userType);
+                                Log.i(TAG,"Inside Update in register 2:" + user_forUpdate);
+                                result = sqLiteDBHelper.updateUser(new User(fullname, email, pass, mobile,user_forUpdate), Constants.UTYPE_BOTH);
+                                if(result != 0)
+                                    Toast.makeText(getApplicationContext(),Constants.TOAST_SELLER_BUYER,Toast.LENGTH_SHORT).show();
+                                Log.i(TAG, "Update user data "+result);
+
+                            } else if (!found) {
+                                //User is not found. Insert the user
+                                Log.i(TAG,"Inside new user in register :" + userType);
+                                result = sqLiteDBHelper.addUser(new User(fullname, email, pass, mobile, userType));
+
+                            }
+                            if (result != Constants.DEFAULT_ERROR) {
+                                builder.setTitle(Constants.POPUP_INFO);
+                                builder.setMessage(Constants.REG_SUCCESS_MSG);
+                                builder.setPositiveButton(Constants.POPUP_OK, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        //Finishing the dialog and removing Activity from stack.
+                                        dialogInterface.dismiss();
+                                        finish();
+                                    }
+                                });
+
+                            } else {
+                                Log.e(TAG, "Inserting into DB failed.");
+                                Toast.makeText(getApplicationContext(), Constants.REG_ERROR_DB, Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
                 }
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
             }
         });
-
     }
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();

@@ -48,9 +48,9 @@ public class LogInActivity extends AppCompatActivity {
 
                 if(email.equals("") || pass.equals("")) {
                     Log.d("Value of email", email);
-                    builder.setTitle("Alert");
+                    builder.setTitle(Constants.POPUP_ALERT);
                     builder.setMessage(Constants.LOGIN_BLANK);
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(Constants.POPUP_OK, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
@@ -63,9 +63,9 @@ public class LogInActivity extends AppCompatActivity {
 
                     if (!found) {
                         Log.d("Value of email", email);
-                        builder.setTitle("Alert");
+                        builder.setTitle(Constants.POPUP_ALERT);
                         builder.setMessage(Constants.LOGIN_INVALID_MSG);
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(Constants.POPUP_OK, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();

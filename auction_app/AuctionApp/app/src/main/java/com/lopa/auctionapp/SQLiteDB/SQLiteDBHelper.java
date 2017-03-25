@@ -85,11 +85,16 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     public boolean searchUser(String email, int userType) {
         boolean found = false;
+        int user_Type = -1;
         SQLiteDatabase db = this.getReadableDatabase();
-        String squery = "SELECT * FROM " + TABLE_USERS+ " WHERE " +KEY_EMAIL+ " =\'" +email+"\' AND "+KEY_USERTYPE+" =" + userType;
+        String squery = "SELECT " + KEY_USERTYPE +  " FROM " + TABLE_USERS+ " WHERE " +KEY_EMAIL+ " =\'" +email+"\' AND "+KEY_USERTYPE+" =" + userType;
         Log.i(TAG,"Search Query "+squery);
         Cursor cursor = db.rawQuery(squery,null);
         if (cursor != null && cursor.getCount() > 0) {
+            if(cursor.moveToFirst()){
+                user_Type = cursor.getInt(cursor.getColumnIndex(KEY_USERTYPE));
+                Log.i(TAG,"user type from searchuser : " + user_Type);
+            }
             found = true;
             Log.i(TAG,"Email "+email+ " already registered."+cursor.getCount());
         }
@@ -127,8 +132,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(squery,null);
         if (cursor != null && cursor.getCount() > 0) {
             found = true;
-            Log.i(TAG,"User "+email+ " is a registered user"+cursor.getColumnCount());
+            cursor.moveToFirst();
+            String username = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+            Log.i(TAG,"User "+email+ " is a registered user : "+ username);
         }
+        Log.i(TAG,"User "+email+ " is a not registered user.");
         return found;
     }
     /**
@@ -154,18 +162,23 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     //Updating a todo
 
-    public int updateProduct(Product product) {
+    public int updateUser(User user, int userTypeToUpdate) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        String strFilter = "KEY_PRODUCT_EMAIL = " + product.getEmailId() + " AND KEY_PRODUCT_USERTYPE = " + product.getUserType();
+        //String updateQuery = "UPDATE "
+        //String strFilter = "KEY_EMAIL = " + user.getEmailId() + " AND KEY_PRODUCT_USERTYPE = " + product.getUserType();
 
-        values.put(KEY_PRODUCT_NAME, product.getProductName());
-        //values.put(KEY_PRODUCT_EMAIL, product.getEmailId());
-        //values.put(KEY_PRODUCT_USERTYPE, product.getUserType());
+        values.put(KEY_NAME, user.getUserName());
+        values.put(KEY_EMAIL, user.getEmailId());
+        values.put(KEY_MOBILE, user.getMobile());
+        values.put(KEY_PASSWORD, user.getPassword());
+        values.put(KEY_USERTYPE, userTypeToUpdate);
 
         // updating row
-        return db.update(TABLE_PRODUCT, values, strFilter, null);
+        String filter = KEY_EMAIL + " = \'" + user.getEmailId() + "\' AND " + KEY_USERTYPE + " = " + user.getUserType();
+        Log.i(TAG, "Updating the User for filter "+filter);
+        return db.update(TABLE_USERS, values, filter, null);
     }
 
     public void deleteProduct(String email, int userType) {
