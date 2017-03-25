@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.utd.lopa.sellerbuyer"
+        applicationId "com.lopa.auctionapp"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
