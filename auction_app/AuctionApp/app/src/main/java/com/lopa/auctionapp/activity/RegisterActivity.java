@@ -74,6 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
                             dialogInterface.dismiss();
                         }
                     });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 } else {
                     boolean email_val = isValidEmail(email);
                     boolean mobile_val = Patterns.PHONE.matcher(mobile).matches();
