@@ -18,6 +18,7 @@ public class Constants {
     public static String TOAST_IUPDATED = "Products are updated successfully";
     public static String TOAST_SUBMIT_NOPRODUCT = "No product to submit";
     public static String TOAST_UPDATE_NOPRODUCT = "No product to update";
+    public static String TOAST_SELLER_BUYER = "Now you are both seller and buyer";
     public static String LOG_OUT_POPUP_TITLE = "Do you want to Logout?";
     public static String LOG_OUT_POPUP_BODY ="Are you sure you want to Logout?";
     public static String LOGIN_BLANK = "Username or Password cannot be blank.";
@@ -31,5 +32,9 @@ public class Constants {
     public static String REG_INVALID_MOBILE = "Not a valid mobile number";
     public static String REG_INVALID_EMAIL = "Not a valid email";
     public static String REG_ERROR_DB = "User registration failed. Try again";
+
+    public static String POPUP_OK = "OK";
+    public static String POPUP_INFO="Information";
+    public static String POPUP_ALERT="Alert";
 
 }
